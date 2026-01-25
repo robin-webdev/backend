@@ -10,16 +10,23 @@ app.get("/", (req, res) => {
   res.send(notes);
 });
 
-app.post("/notes", (req, res) => {
+app.post("/notes/:id", (req, res) => {
   if (req.body) {
-    notes.push(req.body);
+    let note = { ...req.body, id: req.params?.id };
+    if(this.id === req.body.id)
+    notes.push(note);
     res.send("Note Created!");
   } else {
     res.send("Note creation Failed!");
   }
 });
 
-setInterval(() => {
+app.get("/notes/:id", (req, res) => {
+  console.log(req.params);
+  res.send("Done"); 
+});
+
+setInterval(() => { 
   console.log(notes);
 }, 5000);
 
