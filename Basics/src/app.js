@@ -28,7 +28,7 @@ app.delete("/notes/:id", (req, res) => {
   }
   notes.forEach((note, ind) => {
     if (note?.id == req.body?.id) {
-      notes[ind] = null;
+      notes[ind] = null;  
       res.send("Note successfully deleted!");
     }
   });
