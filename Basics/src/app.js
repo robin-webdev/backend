@@ -27,16 +27,29 @@ app.post("/notes/:id", (req, res) => {
 });
 
 app.delete("/notes", (req, res) => {
+  if (!req.body) {
+    res.status(400).json({
+      message: "No Body Found",
+    });
+    return;
+  }
+
+  let idAvailable = false;
   notes.forEach((note, ind) => {
     if (note?.id == req.body?.id) {
       notes[ind] = null;
+      idAvailable = true;
       res.status(204).json({
         message: "Note successfully Deleted",
       }); // No data while using 204 Status Code
-      return;
     }
   });
-  res.send("No note found with this id!");
+
+  if (!idAvailable) {
+    res.status(404).json({
+      message: "No note found with this id!",
+    });
+  }
 });
 
 app.patch("/notes", (req, res) => {
@@ -44,15 +57,24 @@ app.patch("/notes", (req, res) => {
     res.status(400).json({
       message: "No Body Found",
     });
+    return;
   }
+  let idAvailable = false; 
   notes.forEach((note, ind) => {
     if (note?.id == req.body?.id) {
       notes[ind].description = req.body.description;
+      idAvailable = true;
       res.status(200).json({
         message: "User updated successfully!",
       });
+      return;
     }
   });
+  if (!idAvailable) {
+    res.status(404).json({
+      message: "No note found with this id!",
+    });
+  }
 });
 
 export default app;
