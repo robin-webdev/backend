@@ -26,13 +26,7 @@ app.post("/notes/:id", (req, res) => {
   }
 });
 
-app.delete("/notes/:id", (req, res) => {
-  if (!req.body) {
-    res.status(400).json({
-      message: "No Body Found",
-    });
-    return;
-  }
+app.delete("/notes", (req, res) => {
   notes.forEach((note, ind) => {
     if (note?.id == req.body?.id) {
       notes[ind] = null;
@@ -45,17 +39,20 @@ app.delete("/notes/:id", (req, res) => {
   res.send("No note found with this id!");
 });
 
-app.patch("/notes/:id", (req, res) => {
+app.patch("/notes", (req, res) => {
   if (!req.body) {
-    res.send("No body found!");
+    res.status(400).json({
+      message: "No Body Found",
+    });
   }
   notes.forEach((note, ind) => {
-    if (note?.id == req.params?.id) {
+    if (note?.id == req.body?.id) {
       notes[ind].description = req.body.description;
-      res.status();
+      res.status(200).json({
+        message: "User updated successfully!",
+      });
     }
   });
-  res.status;
 });
 
 export default app;
