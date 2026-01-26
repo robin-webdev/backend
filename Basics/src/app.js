@@ -9,27 +9,37 @@ app.use(express.json());
 const notes = [];
 
 app.get("/notes", (req, res) => {
-  res.send(notes);
+  res.status(200).json(notes);
 });
 
 app.post("/notes/:id", (req, res) => {
   if (req.body) {
     let note = { ...req.body, id: req.params?.id };
     notes.push(note);
-    res.send("Note Created!");
+    res.status(201).json({
+      message: "Note created successfully!",
+    });
   } else {
-    res.send("Note creation Failed!");
+    res.status(400).json({
+      message: "No Body Found",
+    });
   }
 });
 
 app.delete("/notes/:id", (req, res) => {
   if (!req.body) {
-    res.send("No body found!");
+    res.status(400).json({
+      message: "No Body Found",
+    });
+    return;
   }
   notes.forEach((note, ind) => {
     if (note?.id == req.body?.id) {
-      notes[ind] = null;  
-      res.send("Note successfully deleted!");
+      notes[ind] = null;
+      res.status(204).json({
+        message: "Note successfully Deleted",
+      }); // No data while using 204 Status Code
+      return;
     }
   });
   res.send("No note found with this id!");
@@ -42,10 +52,10 @@ app.patch("/notes/:id", (req, res) => {
   notes.forEach((note, ind) => {
     if (note?.id == req.params?.id) {
       notes[ind].description = req.body.description;
-      res.send("Note successfully updated!");
+      res.status();
     }
   });
-  res.send("No note found with this id!");
+  res.status;
 });
 
 export default app;
