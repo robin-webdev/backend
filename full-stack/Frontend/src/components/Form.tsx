@@ -22,7 +22,7 @@ const Form = () => {
       <input
         type="text"
         placeholder="Enter Description"
-        {...register("description")}
+        {...register("description")} 
         className="desc"
       />
       <button type="submit">Submit</button>
