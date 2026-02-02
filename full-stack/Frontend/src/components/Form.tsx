@@ -25,7 +25,7 @@ const Form = () => {
         {...register("description")} 
         className="desc"
       />
-      <button type="submit">Submit</button>
+      <button type="submit">Submit</button>  
     </form>
   );
 };
