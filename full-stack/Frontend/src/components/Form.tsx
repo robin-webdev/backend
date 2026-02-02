@@ -24,7 +24,7 @@ const Form = () => {
         placeholder="Enter Description"
         {...register("description")} 
         className="desc"
-      />
+      />   
       <button type="submit">Submit</button>  
     </form>
   );
