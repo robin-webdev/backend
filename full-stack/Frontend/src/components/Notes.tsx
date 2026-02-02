@@ -1,40 +1,64 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { fetchContext } from "./ContextProvider";
+import { useNotes } from "../App";
+import { RiDeleteBin7Line, RiEditLine } from "@remixicon/react";
+import axios from "axios";
+import PopUp from "./Popup";
 
-interface note {
+export interface note {
   title: string;
   description: string;
+  _id: string;
 }
 
 const Notes = () => {
-  const [notes, setNotes] = useState<note[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  if (!fetchContext) {
+    throw new Error("useNotes must be used within NotesProvider");
+  }
 
-  async function getNotes() {
+  const { notes, getNotes } = useNotes();
+
+  async function updateNote(id: string) {
+    setId(id);
+    setIsOpen(true);
+  }
+
+  async function deleteNote(id: string) {
     try {
-      const response = await axios.get("http://localhost:3000/api/notes");
-      const data = response?.data?.data;
-      setNotes(data ? data : []);
+      await axios.delete(`http://localhost:3000/api/notes/${id}`);
+      getNotes();
     } catch (error) {
-      console.log("Error Fetching Notes...");
       console.error(error);
     }
   }
-
   useEffect(() => {
     getNotes();
   }, []);
 
+  const [id, setId] = useState("");
+
   return (
-    <div className="note-container">
-      {notes.map((note, ind) => {
-        return (
-          <div className="note" key={ind}>
-            <div className="title">{note.title}</div>
-            <div className="description">{note.description}</div>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <PopUp isOpen={isOpen} setIsOpen={setIsOpen} id={id} />
+      <div className="note-container">
+        {notes.map((note, ind) => {
+          return (
+            <div className="note" key={ind}>
+              <div className="title">{note.title}</div>
+              <div className="description">{note.description}</div>
+              <div className="icons">
+                <RiDeleteBin7Line
+                  className="icon"
+                  onClick={() => deleteNote(note._id)}
+                />
+                <RiEditLine onClick={() => updateNote(note._id)} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 

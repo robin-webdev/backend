@@ -1,6 +1,5 @@
 import cors from "cors";
 import express from "express";
-import mongoose from "mongoose";
 import { notesModel } from "./models/notes.model.js";
 
 const app = express();

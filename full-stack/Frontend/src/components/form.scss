@@ -8,14 +8,18 @@ $form-input-height: 40px;
 $form-button-color: #007bff;
 $form-button-hover-color: darken($form-button-color, 10%);
 
-form {
+form,
+.inner {
   background-color: $form-background;
-  border: 1px solid $form-border-color;
   border-radius: $form-border-radius;
   padding: $form-padding;
-  max-width: 400px;
-  margin: auto;
+  width: 400px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  align-self: center;
+  margin-top: 50px;
 }
 
 input {
