@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.main {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(29, 29, 29, 0.95);
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+//   gap: 50px;
+}
+
+.note-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.note {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.2s;
+    
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.description {
+    font-size: 1rem;
+    color: #666;
+}
