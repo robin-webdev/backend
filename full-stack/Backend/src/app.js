@@ -1,6 +1,8 @@
 import cors from "cors";
 import express from "express";
 import { notesModel } from "./models/notes.model.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 
@@ -84,6 +86,13 @@ app.patch("/api/notes/:id", async (req, res) => {
       error,
     });
   }
+});
+
+const __filename = fileURLToPath(import.meta.url);
+app.use(express.static(path.join(path.dirname(__filename), "..", "public")));
+
+app.use("*name", (req, res) => {
+  res.sendFile("/index.html");
 });
 
 export default app;
