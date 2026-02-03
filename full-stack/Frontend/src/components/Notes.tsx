@@ -3,7 +3,7 @@ import { fetchContext } from "./ContextProvider";
 import { useNotes } from "../App";
 import { RiDeleteBin7Line, RiEditLine } from "@remixicon/react";
 import axios from "axios";
-import PopUp from "./Popup";
+import PopUp from "./PopUp";
 
 export interface note {
   title: string;
