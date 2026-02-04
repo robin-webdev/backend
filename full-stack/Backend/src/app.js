@@ -89,10 +89,12 @@ app.patch("/api/notes/:id", async (req, res) => {
 });
 
 const __filename = fileURLToPath(import.meta.url);
-app.use(express.static(path.join(path.dirname(__filename), "..", "public")));
+app.use(express.static("./public"));
 
-app.use("*name", (req, res) => {
-  res.sendFile("/index.html");
+app.get("*path", (req, res) => {
+  res.sendFile(
+    path.join(path.dirname(__filename), "..", "public", "index.html"),
+  );
 });
 
 export default app;
