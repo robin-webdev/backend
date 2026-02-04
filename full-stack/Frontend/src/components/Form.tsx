@@ -15,7 +15,7 @@ const Form = () => {
   const formSubmit: SubmitHandler<Inputs> = async (data) => {
     if (!data.title || !data.description) return;
     try {
-      await axios.post("http://localhost:3000/api/notes", data);
+      await axios.post("https://basic-todo-app-89nq.onrender.com/api/notes", data);
       getNotes();
       reset();
     } catch (error) {

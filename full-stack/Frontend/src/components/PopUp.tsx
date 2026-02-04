@@ -17,7 +17,7 @@ const PopUp = (props: {
   const formSubmit: SubmitHandler<Inputs> = async (data) => {
     if (!data.title || !data.description) return;
     try {
-      await axios.patch(`http://localhost:3000/api/notes/${props.id}`, data);
+      await axios.patch(`https://basic-todo-app-89nq.onrender.com/api/notes/${props.id}`, data);
       props.setIsOpen(false);
       getNotes();
       reset();

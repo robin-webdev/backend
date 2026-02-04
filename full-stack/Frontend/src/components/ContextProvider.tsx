@@ -13,7 +13,7 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
 
   async function getNotes() {
     try {
-      const response = await axios.get("http://localhost:3000/api/notes");
+      const response = await axios.get("https://basic-todo-app-89nq.onrender.com/api/notes");
       const data = response?.data?.data;
       setNotes(data ? data : []);
     } catch (error) {

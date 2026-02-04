@@ -26,7 +26,7 @@ const Notes = () => {
 
   async function deleteNote(id: string) {
     try {
-      await axios.delete(`http://localhost:3000/api/notes/${id}`);
+      await axios.delete(`https://basic-todo-app-89nq.onrender.com/api/notes/${id}`);
       getNotes();
     } catch (error) {
       console.error(error);
