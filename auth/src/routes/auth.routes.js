@@ -1,5 +1,6 @@
 import express from "express";
 import userModel from "../models/user.model.js";
+import jwt from "jsonwebtoken";
 
 const authRouter = express.Router();
 
@@ -15,25 +16,35 @@ authRouter.post("/register", async (req, res) => {
 
     const userExist = await userModel.findOne({ email });
 
-    // if (userExist) {
-    //   res.status(409).json({
-    //     message: "User already exists...",
-    //   });
-    // }
+    if (userExist) {
+      res.status(409).json({
+        message: "User already exists...",
+      });
+    }
 
-    await userModel.create({
+    const user = await userModel.create({
       name,
       email,
       password,
     });
 
+    const token = jwt.sign(
+      {
+        id: user._id,
+        email,
+      },
+      process.env.JWT_SECRET,
+    );
+
     res.status(201).json({
       message: "User Created...",
+      user,
+      token,
     });
   } catch (error) {
     res.status(400).json({
       message: "Error creating User...",
-      error: error.body,
+      error: error,
     });
   }
 });
