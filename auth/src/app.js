@@ -7,6 +7,5 @@ app.get("/", (req, res) => {
     message: "Reqeust Recieved!",
   });
 });
- 
+
 export default app; 
- 
