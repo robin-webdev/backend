@@ -8,4 +8,6 @@ app.get("/", (req, res) => {
   });
 });
 
-export default app; 
+app.post("/register", (req, res) => {});
+
+export default app;
