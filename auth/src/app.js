@@ -13,5 +13,5 @@ app.use(express.json());
 
 app.use("/api/auth", authRouter);
  
-export default app; 
+export default app;  
       
