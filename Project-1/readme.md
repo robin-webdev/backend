@@ -24,5 +24,5 @@ Save a Post
 
 ```
 Followers
-Following
+Following 
 ```
