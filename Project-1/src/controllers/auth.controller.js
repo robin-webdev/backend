@@ -1,3 +1,7 @@
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import userModel from "../models/user.model.js";
+
 export async function registerController(req, res) {
   try {
     if (!req.body) throw new Error("No Body Found");
@@ -9,12 +13,13 @@ export async function registerController(req, res) {
     });
     if (isUserAlreadyExists)
       return res.status(409).json({
-        message: isUserAlreadyExists.email
-          ? "Email Aready Exists"
-          : "Username is already Taken",
+        message:
+          isUserAlreadyExists.email === email
+            ? "Email Aready Exists"
+            : "Username is already Taken",
       });
 
-    const hash = crypto.createHash("sha256").update(password).digest("hex");
+    const hash = await bcrypt.hash(password, 10); // 10 is salt - which is the layers of hashing, how many times do we hash the password
 
     const user = await userModel.create({
       username,
@@ -74,12 +79,12 @@ export async function loginController(req, res) {
     if (!user)
       return res.status(404).json({ message: "Invalid email or username" });
 
-    const hash = crypto
-      .createHash("sha256")
-      .update(req.body.password)
-      .digest("hex");
+    const isPasswordValid = await bcrypt.compare(
+      req.body.password,
+      user.password,
+    );
 
-    if (hash !== user.password)
+    if (!isPasswordValid)
       return res.status(409).json({
         message: "Invalid Password",
       });
