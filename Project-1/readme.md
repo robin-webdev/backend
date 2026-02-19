@@ -8,7 +8,7 @@ Register
     - Generate token for user       
 Login
 Logout (token blacklisting)
-OTP Based Registration (optional)
+OTP Based Registration (optional)   
 ```
 
 > ## POST
