@@ -5,7 +5,7 @@
 ```
 Register
     - Save User Data
-    - Generate token for user
+    - Generate token for user  
 Login
 Logout (token blacklisting)
 OTP Based Registration (optional)
