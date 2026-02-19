@@ -9,7 +9,7 @@ Register
 Login
 Logout (token blacklisting)   
 OTP Based Registration (optional)      
-```
+```   
 
 > ## POST
 
