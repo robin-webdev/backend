@@ -59,7 +59,7 @@ export async function loginController(req, res) {
       });
     }
 
-    if (!(req.body.email || (req.body.password && req.body.password))) {
+    if (!(req.body.password && (req.body.email || req.body.username))) {
       return res.status(404).json({
         message: "Field is missing!",
       });
@@ -88,6 +88,7 @@ export async function loginController(req, res) {
       return res.status(409).json({
         message: "Invalid Password",
       });
+      
     const token = jwt.sign(
       { id: user._id, email: user.email },
       process.env.JWT_SECRET,
