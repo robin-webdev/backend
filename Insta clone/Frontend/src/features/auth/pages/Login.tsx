@@ -72,7 +72,7 @@ export function Login() {
                   {...register("usernameOrEmail")}
                   id="email"
                   type="text"
-                  placeholder="m@example.com"
+                  placeholder="Email or Username"
                   required
                 />
               </div>
@@ -81,7 +81,7 @@ export function Login() {
                   <Label htmlFor="password">Password</Label>
                 </div>
                 <Input
-                  placeholder="Enter you password"
+                  placeholder="Password"
                   {...register("password")}
                   id="password"
                   type="password"

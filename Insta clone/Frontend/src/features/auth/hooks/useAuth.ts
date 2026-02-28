@@ -1,13 +1,20 @@
-import { loginAPI } from "../services/auth.api.ts";
-import type { LoginType } from "../types/auth.types.ts";
+import { loginAPI, registerAPI } from "../services/auth.api.ts";
+import type { LoginApiType, RegisterApiTypes } from "../types/auth.types.ts";
 
-export  function useAuth() {
-  const login: LoginType = async (password, email, username) => {
-    const data = await loginAPI(password, username, email);
-  
-    return data;
+export function useAuth() {
+  const login: LoginApiType = async (password, email, username) => {
+    return await loginAPI(password, username, email);
   };
 
+  const registerUser: RegisterApiTypes = async (
+    name,
+    username,
+    email,
+    password,
+    profileImage,
+  ) => {
+    return await registerAPI(name, username, email, password, profileImage);
+  };
 
-  return { login };
+  return { login, registerUser };
 }
